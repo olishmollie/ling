@@ -1,0 +1,13 @@
+<statement>   ::= <implication> | ''
+
+<implication> ::= <disjunction> | <disjunction> '->' <implication>
+
+<disjunction> ::= <conjuction> | <conjunction> '+' <disjunction>
+
+<conjunction> ::= <negation> | <negation> '*' <conjunction>
+
+<negation>    ::= <identifier> | <identifier> '\''
+
+<identifier>  ::= <letter> | <letter> <identifier> | '(' <statement> ')'
+
+<letter>      ::= 'a' ... 'z' | 'A' ... 'Z'
