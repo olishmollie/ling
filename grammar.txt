@@ -6,7 +6,7 @@
 
 <conjunction> ::= <negation> | <negation> '*' <conjunction>
 
-<negation>    ::= <identifier> | <identifier> '\''
+<negation>    ::= <identifier> | <negation> '\''
 
 <identifier>  ::= <letter> | <letter> <identifier> | '(' <statement> ')'
 
