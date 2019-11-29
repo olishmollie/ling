@@ -2,7 +2,7 @@
 
 #include <iomanip>
 #include <map>
-#include <sstream>
+#include <iostream>
 
 Table::Table(Ast *ast) : ast(ast) {
     unsigned int numvars, rows, cols;
@@ -11,7 +11,6 @@ Table::Table(Ast *ast) : ast(ast) {
     rows = 2 << (numvars - 1);
     cols = numvars + 1;
     init(numvars, rows, cols);
-    solve();
 }
 
 Table::~Table() {
@@ -23,21 +22,16 @@ Table::~Table() {
 }
 
 void Table::init(unsigned int numvars, unsigned int rows, unsigned int cols) {
-    truth_table = new bool *[rows];
-    for (unsigned int i = 0; i < rows; i++) {
-        truth_table[i] = new bool[cols];
-    }
-    this->numvars = numvars;
-    this->rows = rows;
-    this->cols = cols;
-}
-
-void Table::solve() {
     Evaluator ev;
-    truth_table[0][numvars] = ast->accept(ev, ctx);
+    vars = new std::string[numvars];
+    truth_table = new int *[rows];
     for (unsigned int i = 0; i < rows; i++) {
+        truth_table[i] = new int[cols];
         unsigned j = 0;
         for (auto &pair : ctx) {
+            if (i == 0) {
+                vars[j] = pair.first;
+            }
             if (pair.first == "t") {
                 pair.second = true;
             } else if (pair.first == "f") {
@@ -49,44 +43,54 @@ void Table::solve() {
         }
         truth_table[i][numvars] = ast->accept(ev, ctx);
     }
+    this->numvars = numvars;
+    this->rows = rows;
+    this->cols = cols;
 }
 
 // oof.
-std::ostream &operator<<(std::ostream &ss, const Table &table) {
-    std::string ast_str = table.ast->to_string();
-    std::vector<int> lengths;
-    ss << " ";
-    unsigned int ctx_size = 0;
-    for (auto &pair : table.ctx) {
-        lengths.push_back(pair.first.length());
-        ctx_size += pair.first.length() + 1;
-        ss << pair.first << " ";
+std::ostream &operator<<(std::ostream &os, const Table &table) {
+    std::string ast_str;
+    unsigned int len_inputs, row_len;
+
+    // print heading
+    os << " ";
+    len_inputs = 0;
+    for (unsigned int i = 0; i < table.numvars; i++) {
+        len_inputs += table.vars[i].length() + 1;
+        os << table.vars[i] << " ";
     }
-    ss << "| " << ast_str << std::endl;
-    unsigned int size = ast_str.length() + ctx_size + 2;
-    for (unsigned int i = 0; i < size + 1; i++) {
-        ss << (i == ctx_size + 1 ? "|" : "-");
+    ast_str = table.ast->to_string();
+    os << "| " << ast_str << std::endl;
+
+    // print "----" below heading
+    row_len = ast_str.length() + len_inputs + 2;
+    for (unsigned int i = 0; i < row_len + 1; i++) {
+        os << (i == len_inputs + 1 ? '|' : '-');
     }
-    ss << std::endl;
+    os << std::endl;
+
+    // print table
     for (unsigned int i = 0; i < table.rows; i++) {
-        ss << " ";
+        os << " ";
         for (unsigned int j = 0; j < table.cols; j++) {
             if (j == table.cols - 1) {
-                ss << std::setw(size - ctx_size - 2);
+                os << std::setw(row_len - len_inputs - 2);
             } else {
-                ss << std::setw(lengths[j]);
+                os << std::setw(table.vars[j].length());
             }
-            ss << std::right << table.truth_table[i][j];
+            os << std::right << table.truth_table[i][j];
             if (j != table.cols - 1) {
-                ss << " ";
+                os << " ";
             }
             if (j == table.cols - 2) {
-                ss << "| ";
+                os << "| ";
             }
         }
         if (i != table.rows - 1) {
-            ss << std::endl;
+            os << std::endl;
         }
     }
-    return ss;
+
+    return os;
 }

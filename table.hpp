@@ -9,10 +9,10 @@ class Table {
     Ast *ast;
     Context ctx;
     unsigned int numvars, rows, cols;
-    bool **truth_table;
+    std::string *vars;
+    int **truth_table;
 
     void init(unsigned int numvars, unsigned int rows, unsigned int cols);
-    void solve();
 
   public:
     Table(Ast *ast);
