@@ -1,23 +1,25 @@
 #include "ast.hpp"
 #include "parse.hpp"
+#include "table.hpp"
+
+#include <iostream>
+#include <iomanip>
 
 using namespace std;
-using namespace ling;
 
 int main() {
-    init();
     string input;
     cout << ">> ";
     while (getline(cin, input)) {
         unsigned int start = 0;
         try {
-            Evaluator ev;
             vector<Token> tokens = tokenize(input);
             Ast *ast = parse(tokens, start);
-            Ast *evaluated = ast->accept(ev);
-            cout << evaluated->to_string() << endl;
-            delete ast;
-            delete evaluated;
+            if (ast) {
+                Table table(ast);
+                cout << table << endl;
+                delete ast;
+            }
         } catch (const ScanError &e) {
             cerr << "scan error: " << e.msg << endl;
         } catch (const ParseError &e) {
@@ -26,5 +28,4 @@ int main() {
         cout << ">> ";
     }
     cout << endl;
-    cleanup();
 }
