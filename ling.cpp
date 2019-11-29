@@ -18,7 +18,6 @@ int main() {
             if (ast) {
                 Table table(ast);
                 cout << table << endl;
-                delete ast;
             }
         } catch (const ScanError &e) {
             cerr << "scan error: " << e.msg << endl;

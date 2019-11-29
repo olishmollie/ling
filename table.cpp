@@ -19,6 +19,7 @@ Table::~Table() {
         delete[] truth_table[i];
     }
     delete[] truth_table;
+    delete ast;
 }
 
 void Table::init(unsigned int numvars, unsigned int rows, unsigned int cols) {
