@@ -1,6 +1,25 @@
 #include "ast.hpp"
 
-std::string Identifier::to_string() const {
+#include <sstream>
+
+std::string Ast::to_string() const {
+    std::stringstream ss;
+    if (grouped) {
+        ss << "(";
+    }
+    ss << to_string_virtual();
+    if (grouped) {
+        ss << ")";
+    }
+    return ss.str();
+}
+
+std::ostream &operator<<(std::ostream &os, const Ast *ast) {
+    os << ast->to_string();
+    return os;
+}
+
+std::string Identifier::to_string_virtual() const {
     return ident;
 }
 
@@ -12,8 +31,10 @@ void Identifier::add_to_context(Context &ctx) const {
     ctx.insert(std::pair<Token, bool>(ident, false));
 }
 
-std::string Unop::to_string() const {
-    return child->to_string() + "'";
+std::string Unop::to_string_virtual() const {
+    std::stringstream ss;
+    ss << child->to_string() << "'";
+    return ss.str();
 }
 
 bool Unop::accept(Evaluator &ev, Context &ctx) {
@@ -24,8 +45,10 @@ void Unop::add_to_context(Context &ctx) const {
     child->add_to_context(ctx);
 }
 
-std::string Binop::to_string() const {
-    return "(" + lhs->to_string() + " " + op + " " + rhs->to_string() + ")";
+std::string Binop::to_string_virtual() const {
+    std::stringstream ss;
+    ss << lhs->to_string() << " " << op << " " << rhs->to_string();
+    return ss.str();
 }
 
 bool Binop::accept(Evaluator &ev, Context &ctx) {

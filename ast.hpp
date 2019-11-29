@@ -12,17 +12,21 @@ struct Ast;
 struct Evaluator;
 
 struct Ast {
-    virtual std::string to_string() const = 0;
+    bool grouped = false;
+    std::string to_string() const;
+    virtual std::string to_string_virtual() const = 0;
     virtual bool accept(Evaluator &ev, Context &ctx) = 0;
     virtual void add_to_context(Context &ctx) const = 0;
     virtual ~Ast() {}
 };
 
+std::ostream &operator<<(std::ostream &os, const Ast *ast);
+
 struct Identifier : public Ast {
     const Token ident;
     Identifier(){};
     Identifier(Token ident) : ident(ident) {}
-    std::string to_string() const;
+    std::string to_string_virtual() const;
     bool accept(Evaluator &ev, Context &ctx);
     void add_to_context(Context &ctx) const;
 };
@@ -32,7 +36,7 @@ struct Unop : public Ast {
     Ast *child;
     Unop() {}
     Unop(Token op, Ast *child) : op(op), child(child) {}
-    std::string to_string() const;
+    std::string to_string_virtual() const;
     bool accept(Evaluator &ev, Context &ctx);
     void add_to_context(Context &ctx) const;
     ~Unop() { delete child; }
@@ -44,7 +48,7 @@ struct Binop : public Ast {
     Ast *rhs;
     Binop() {}
     Binop(Token op, Ast *lhs, Ast *rhs) : op(op), lhs(lhs), rhs(rhs) {}
-    std::string to_string() const;
+    std::string to_string_virtual() const;
     bool accept(Evaluator &ev, Context &ctx);
     void add_to_context(Context &ctx) const;
     ~Binop() {

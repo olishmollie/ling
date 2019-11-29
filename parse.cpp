@@ -86,6 +86,7 @@ Ast *identifier(TokenVec &tokens, unsigned int &pos) {
     } else if (token == "(") {
         Ast *group_ast = parse(tokens, pos);
         expect(")", tokens, pos);
+        group_ast->grouped = true;
         return group_ast;
     } else {
         if ((token < "a" || token > "z") && (token < "A" || token > "Z")) {
