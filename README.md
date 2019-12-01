@@ -4,6 +4,7 @@
 
 ## Grammar
 
+```
 <statement>   ::= <equivalence> | ''
 
 <equivalence> ::= <implication> | <implication> '=' <equivalence>
@@ -19,3 +20,4 @@
 <identifier>  ::= <letter> | <letter> <identifier> | '(' <statement> ')'
 
 <letter>      ::= 'a' ... 'z' | 'A' ... 'Z'
+```
