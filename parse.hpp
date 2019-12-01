@@ -21,5 +21,6 @@ struct ParseError : std::exception {
 
 TokenVec tokenize(std::string input);
 Ast *parse(TokenVec &tokens, unsigned int &pos);
+void print_tokens(TokenVec &tokens);
 
 #endif

@@ -7,7 +7,7 @@
 //////////////////// Lexing ///////////////////////
 bool is_delim(char c) {
     return c == '-' || c == '\'' || c == '(' || c == ')' || c == '+' ||
-           c == '*' || c == '=';
+           c == '*' || c == '=' || c == '#';
 }
 
 TokenVec tokenize(std::string input) {
@@ -17,6 +17,13 @@ TokenVec tokenize(std::string input) {
         Token token;
         char c = ss.get();
         if (c == EOF) {
+            break;
+        } else if (isspace(c)) {
+            continue; // skip spaces
+        } else if (c == '#') {
+            while (c != EOF) {
+                c = ss.get();
+            }
             break;
         } else if (is_delim(c)) {
             token = std::string(1, c);
@@ -35,12 +42,11 @@ TokenVec tokenize(std::string input) {
             }
             ss.unget();
             tokens.push_back(token);
-        } else if (isspace(c)) {
-            continue; // skip spaces
         } else {
             throw ScanError("invalid character '" + std::string(1, c) + "'");
         }
     }
+
     return tokens;
 }
 

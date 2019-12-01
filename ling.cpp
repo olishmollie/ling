@@ -25,6 +25,7 @@ int main() {
 
             // the empty string parses to nullptr
             if (!ast) {
+                cout << ">> ";
                 continue;
             }
 
