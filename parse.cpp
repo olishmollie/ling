@@ -7,7 +7,7 @@
 //////////////////// Lexing ///////////////////////
 bool is_delim(char c) {
     return c == '-' || c == '\'' || c == '(' || c == ')' || c == '+' ||
-           c == '*';
+           c == '*' || c == '=';
 }
 
 TokenVec tokenize(std::string input) {
@@ -22,7 +22,8 @@ TokenVec tokenize(std::string input) {
             token = std::string(1, c);
             if (c == '-') {
                 if (ss.peek() != '>') {
-                    goto error;
+                    throw ScanError("invalid character '" +
+                                    std::string(1, ss.peek()) + "'");
                 }
                 token.append(1, ss.get());
             }
@@ -37,7 +38,6 @@ TokenVec tokenize(std::string input) {
         } else if (isspace(c)) {
             continue; // skip spaces
         } else {
-        error:
             throw ScanError("invalid character '" + std::string(1, c) + "'");
         }
     }
@@ -138,9 +138,19 @@ Ast *implication(TokenVec &tokens, unsigned int &pos) {
     return lhs;
 }
 
+Ast *equivalence(TokenVec &tokens, unsigned int &pos) {
+    Ast *lhs = implication(tokens, pos);
+    Token op = peek(tokens, pos);
+    if (op == "=") {
+        next(tokens, pos);
+        return new Binop(op, lhs, equivalence(tokens, pos));
+    }
+    return lhs;
+}
+
 Ast *parse(TokenVec &tokens, unsigned int &pos) {
     if (tokens.empty()) {
         return nullptr;
     }
-    return implication(tokens, pos);
+    return equivalence(tokens, pos);
 }

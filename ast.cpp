@@ -80,6 +80,8 @@ bool Evaluator::eval(Binop *bn, Context &ctx) {
         return lhs || rhs;
     } else if (bn->op == "*") {
         return lhs && rhs;
+    } else if (bn->op == "=") {
+        return lhs == rhs;
     } else { // binop == "->"
         return !lhs || rhs;
     }

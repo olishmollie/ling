@@ -1,0 +1,273 @@
+# The configurations that used for the recording, feel free to edit them
+config:
+
+  # Specify a command to be executed
+  # like `/bin/bash -l`, `ls`, or any other commands
+  # the default is bash for Linux
+  # or powershell.exe for Windows
+  command: bash -l
+  
+  # Specify the current working directory path
+  # the default is the current working directory path
+  cwd: /Users/ajbond/Dev/cpp/ling
+  
+  # Export additional ENV variables
+  env:
+    recording: true
+  
+  # Explicitly set the number of columns
+  # or use `auto` to take the current
+  # number of columns of your shell
+  cols: 86
+  
+  # Explicitly set the number of rows
+  # or use `auto` to take the current
+  # number of rows of your shell
+  rows: 43
+  
+  # Amount of times to repeat GIF
+  # If value is -1, play once
+  # If value is 0, loop indefinitely
+  # If value is a positive number, loop n times
+  repeat: 0
+  
+  # Quality
+  # 1 - 100
+  quality: 100
+  
+  # Delay between frames in ms
+  # If the value is `auto` use the actual recording delays
+  frameDelay: auto
+  
+  # Maximum delay between frames in ms
+  # Ignored if the `frameDelay` isn't set to `auto`
+  # Set to `auto` to prevent limiting the max idle time
+  maxIdleTime: 2000
+  
+  # The surrounding frame box
+  # The `type` can be null, window, floating, or solid`
+  # To hide the title use the value null
+  # Don't forget to add a backgroundColor style with a null as type
+  frameBox:
+    type: floating
+    title: Terminalizer
+    style:
+      border: 0px black solid
+      # boxShadow: none
+      # margin: 0px
+  
+  # Add a watermark image to the rendered gif
+  # You need to specify an absolute path for
+  # the image on your machine or a URL, and you can also
+  # add your own CSS styles
+  watermark:
+    imagePath: null
+    style:
+      position: absolute
+      right: 15px
+      bottom: 15px
+      width: 100px
+      opacity: 0.9
+  
+  # Cursor style can be one of
+  # `block`, `underline`, or `bar`
+  cursorStyle: block
+  
+  # Font family
+  # You can use any font that is installed on your machine
+  # in CSS-like syntax
+  fontFamily: "Monaco, Lucida Console, Ubuntu Mono, Monospace"
+  
+  # The size of the font
+  fontSize: 12
+  
+  # The height of lines
+  lineHeight: 1
+  
+  # The spacing between letters
+  letterSpacing: 0
+  
+  # Theme
+  theme:
+    background: "transparent"
+    foreground: "#afafaf"
+    cursor: "#c7c7c7"
+    black: "#232628"
+    red: "#fc4384"
+    green: "#b3e33b"
+    yellow: "#ffa727"
+    blue: "#75dff2"
+    magenta: "#ae89fe"
+    cyan: "#708387"
+    white: "#d5d5d0"
+    brightBlack: "#626566"
+    brightRed: "#ff7fac"
+    brightGreen: "#c8ed71"
+    brightYellow: "#ebdf86"
+    brightBlue: "#75dff2"
+    brightMagenta: "#ae89fe"
+    brightCyan: "#b1c6ca"
+    brightWhite: "#f9f9f4"
+  
+# Records, feel free to edit them
+records:
+  - delay: 264
+    content: "Restored session: Sun Dec  1 14:18:50 CST 2019\r\n"
+  - delay: 163
+    content: "\e]7;file://macbookpro.local/Users/ajbond/Dev/cpp/ling\a\e[0;31majbond\e[0m ling (\e[32mequivalence\e[0m \e[31m*\e[31m%\e[0m):> "
+  - delay: 530
+    content: "\e[H\e[2J\e[0;31majbond\e[0m ling (\e[32mequivalence\e[0m \e[31m*\e[31m%\e[0m):> "
+  - delay: 406
+    content: '!'
+  - delay: 224
+    content: .
+  - delay: 180
+    content: "\r\n./a.out \r\n>> "
+  - delay: 549
+    content: a
+  - delay: 123
+    content: ' '
+  - delay: 383
+    content: +
+  - delay: 101
+    content: ' '
+  - delay: 214
+    content: a
+  - delay: 214
+    content: ''''
+  - delay: 246
+    content: "\r\nT\r\n>> "
+  - delay: 540
+    content: a
+  - delay: 146
+    content: ' '
+  - delay: 169
+    content: '*'
+  - delay: 68
+    content: ' '
+  - delay: 147
+    content: a
+  - delay: 66
+    content: ''''
+  - delay: 191
+    content: "\r\nF\r\n>> "
+  - delay: 1429
+    content: (
+  - delay: 158
+    content: a
+  - delay: 169
+    content: '-'
+  - delay: 224
+    content: '>'
+  - delay: 1272
+    content: b
+  - delay: 270
+    content: )
+  - delay: 124
+    content: ' '
+  - delay: 146
+    content: =
+  - delay: 79
+    content: ' '
+  - delay: 270
+    content: a
+  - delay: 68
+    content: ''''
+  - delay: 337
+    content: +
+  - delay: 270
+    content: b
+  - delay: 370
+    content: "\r\nT\r\n>> "
+  - delay: 4973
+    content: (
+  - delay: 146
+    content: a
+  - delay: 101
+    content: ' '
+  - delay: 91
+    content: =
+  - delay: 90
+    content: ' '
+  - delay: 135
+    content: b
+  - delay: 180
+    content: )
+  - delay: 495
+    content: ' '
+  - delay: 90
+    content: =
+  - delay: 90
+    content: ' '
+  - delay: 3082
+    content: (
+  - delay: 135
+    content: a
+  - delay: 114
+    content: '-'
+  - delay: 246
+    content: '>'
+  - delay: 641
+    content: b
+  - delay: 1181
+    content: )
+  - delay: 799
+    content: '*'
+  - delay: 281
+    content: (
+  - delay: 540
+    content: b
+  - delay: 405
+    content: '-'
+  - delay: 247
+    content: '>'
+  - delay: 180
+    content: a
+  - delay: 237
+    content: )
+  - delay: 269
+    content: "\r\nT\r\n>> "
+  - delay: 7820
+    content: b
+  - delay: 314
+    content: '*'
+  - delay: 180
+    content: c
+  - delay: 90
+    content: ''''
+  - delay: 293
+    content: '*'
+  - delay: 250
+    content: d
+  - delay: 110
+    content: ''''
+  - delay: 439
+    content: +
+  - delay: 1429
+    content: a
+  - delay: 281
+    content: '*'
+  - delay: 247
+    content: b
+  - delay: 90
+    content: ''''
+  - delay: 259
+    content: +
+  - delay: 259
+    content: a
+  - delay: 281
+    content: '*'
+  - delay: 181
+    content: c
+  - delay: 257
+    content: "\r\n a b c d | b * c' * d' + a * b' + a * c\r\n---------|-----------------------------\r\n 0 0 0 0 |                            0\r\n 0 0 0 1 |                            0\r\n 0 0 1 0 |                            0\r\n 0 0 1 1 |                            0\r\n 0 1 0 0 |                            1\r\n 0 1 0 1 |                            0\r\n 0 1 1 0 |                            0\r\n 0 1 1 1 |                            0\r\n 1 0 0 0 |                            1\r\n 1 0 0 1 |                            1\r\n 1 0 1 0 |                            1\r\n 1 0 1 1 |                            1\r\n 1 1 0 0 |                            1\r\n 1 1 0 1 |                            0\r\n 1 1 1 0 |                            1\r\n 1 1 1 1 |                            1\r\n\r\n[4, 12] -100*\r\n[8, 10, 12, 14] 1--0*\r\n[8, 9, 10, 11] 10--*\r\n[10, 11, 14, 15] 1-1-*\r\n\r\n      4  8  9 10 11 12 14 15\r\nP1:   1  0  0  0  0  1  0  0\r\nP2:   0  1  0  1  0  1  1  0\r\nP3:   0  1  1  1  1  0  0  0\r\nP4:   0  0  0  1  1  0  1  1\r\n\r\n>> "
+  - delay: 4792
+    content: "^D\b\b\r\n"
+  - delay: 52
+    content: "\e]7;file://macbookpro.local/Users/ajbond/Dev/cpp/ling\a\e[0;31majbond\e[0m ling (\e[32mequivalence\e[0m \e[31m*\e[31m%\e[0m):> "
+  - delay: 499
+    content: "logout\r\nSaving session..."
+  - delay: 10
+    content: "\r\n...saving history..."
+  - delay: 7
+    content: "truncating history files...\r\n...completed.\r\n"

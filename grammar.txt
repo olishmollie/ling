@@ -1,4 +1,6 @@
-<statement>   ::= <implication> | ''
+<statement>   ::= <equivalence> | ''
+
+<equivalence> ::= <implication> | <implication> '=' <equivalence>
 
 <implication> ::= <disjunction> | <disjunction> '->' <implication>
 
