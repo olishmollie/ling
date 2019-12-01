@@ -1,9 +1,10 @@
 #include "ast.hpp"
 #include "parse.hpp"
 #include "table.hpp"
+#include "solver.hpp"
 
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 
 using namespace std;
 
@@ -17,7 +18,9 @@ int main() {
             Ast *ast = parse(tokens, start);
             if (ast) {
                 Table table(ast);
-                cout << table << endl;
+                cout << table << endl << endl;
+                Solver solver(&table);
+                solver.run();
             }
         } catch (const ScanError &e) {
             cerr << "scan error: " << e.msg << endl;
