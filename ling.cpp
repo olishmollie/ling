@@ -10,6 +10,7 @@
 using namespace std;
 
 void print_vec(std::vector<Implicant> &impls);
+void print_vec(std::vector<std::vector<bool>> &table);
 
 int main() {
     string input;
@@ -28,19 +29,19 @@ int main() {
             }
 
             Table table(ast);
-            cout << table << endl << endl;
-
             Solver solver(&table);
-            std::vector<Implicant> essential_primes = solver.solve();
+            solver.solve();
 
-            if (essential_primes.empty()) {
+            if (solver.prime_implicants.empty()) {
                 std::cout << "F" << std::endl;
-
-            } else if (essential_primes.size() == 1 &&
-                       essential_primes[0].is_true()) {
+            } else if (solver.prime_implicants.size() == 1 &&
+                       solver.prime_implicants[0].is_true()) {
                 std::cout << "T" << std::endl;
             } else {
-                print_vec(essential_primes);
+                cout << table << endl << endl;
+                print_vec(solver.prime_implicants);
+                solver.petricks_method();
+                solver.print_prime_table();
             }
 
         } catch (const ScanError &e) {
@@ -56,6 +57,17 @@ int main() {
 void print_vec(std::vector<Implicant> &impls) {
     for (auto impl : impls) {
         cout << impl.to_string() << endl;
+    }
+    cout << endl;
+}
+
+void print_vec(std::vector<std::vector<bool>> &table) {
+    for (unsigned int i = 0; i < table.size(); i++) {
+        cout << i << ":";
+        for (unsigned int j = 0; j < table[i].size(); j++) {
+            cout << (table[i][j] ? "X" : " ");
+        }
+        cout << endl;
     }
     cout << endl;
 }

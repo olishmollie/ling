@@ -1,15 +1,27 @@
 #include "solver.hpp"
 
 #include <algorithm>
-#include <set>
+#include <iomanip>
 
-Solver::Solver(Table *table) : table(table) {
+Solver::Solver(Table *table) : table(table), prime_table(nullptr) {
     for (unsigned int i = 0; i < table->rows; i++) {
         if (table->truth_table[i][table->numvars] == '1') {
+            minterms.push_back(i);
             std::string impl_str = table->truth_table[i].substr(
                 0, table->truth_table[i].length() - 1);
-            impls.insert(impl_str);
+            Implicant impl = Implicant(impl_str);
+            impl.add_minterm(i);
+            impls.insert(impl);
         }
+    }
+}
+
+Solver::~Solver() {
+    if (prime_table) {
+        for (unsigned int i = 0; i < prime_implicants.size(); i++) {
+            delete[] prime_table[i];
+        }
+        delete[] prime_table;
     }
 }
 
@@ -41,7 +53,8 @@ Implicant Solver::compare(const Implicant &a, const Implicant &b) const {
 
     for (unsigned int i = 0; i < a.bin_rep.length(); i++) {
 
-        // Only implicants with dashes in line will form a valid comparison.
+        // Only implicants with dashes in line will
+        // form a valid comparison.
         if (a.bin_rep[i] == '-') {
             if (b.bin_rep[i] != '-') {
                 return a;
@@ -65,7 +78,13 @@ Implicant Solver::compare(const Implicant &a, const Implicant &b) const {
         unsigned int idx = bin_rep.find('1');
         bin_rep = a.bin_rep;
         bin_rep[idx] = '-';
-        return Implicant(bin_rep);
+
+        // Add the prime_implicants of a and b.
+        Implicant impl = Implicant(bin_rep);
+        impl.add_minterms(a.minterms);
+        impl.add_minterms(b.minterms);
+
+        return impl;
     }
 
     return a;
@@ -75,10 +94,10 @@ bool cmp_num_ones(const Implicant &a, const Implicant &b) {
     return a.num_ones < b.num_ones;
 }
 
-// A naive implementation of the Quine-McCluskey tabular method
+// An implementation of the Quine-McCluskey tabular method
 // for minimizing boolean expressions:
 // https://en.wikipedia.org/wiki/Quine-McCluskey_algorithm
-std::vector<Implicant> Solver::solve() {
+void Solver::solve() {
     std::set<Implicant> result, used;
 
     while (!done()) {
@@ -102,7 +121,7 @@ std::vector<Implicant> Solver::solve() {
             }
         }
 
-        // any unused implicants are essential primes
+        // any unused implicants are essential prime_implicants
         for (auto unused : used) {
             unused.done = true;
             result.insert(unused);
@@ -115,9 +134,35 @@ std::vector<Implicant> Solver::solve() {
     // Use the set to create a vector and sort it by number of ones. I
     // was trying to figure out to do this with a set alone, but
     // this is a lot easier.
-    std::vector<Implicant> impl_vec =
-        std::vector<Implicant>(impls.begin(), impls.end());
-    std::sort(impl_vec.begin(), impl_vec.end(), cmp_num_ones);
+    prime_implicants = std::vector<Implicant>(impls.begin(), impls.end());
+    std::sort(prime_implicants.begin(), prime_implicants.end(), cmp_num_ones);
+}
 
-    return impl_vec;
+void Solver::petricks_method() {
+    prime_table = new bool *[prime_implicants.size()];
+    for (unsigned int i = 0; i < prime_implicants.size(); i++) {
+        prime_table[i] = new bool[minterms.size()];
+        Implicant impl = prime_implicants[i];
+        for (unsigned int j = 0; j < minterms.size(); j++) {
+            prime_table[i][j] =
+                std::find(impl.minterms.begin(), impl.minterms.end(),
+                          minterms[j]) != impl.minterms.end();
+        }
+    }
+}
+
+void Solver::print_prime_table() {
+    std::cout << "    ";
+    for (unsigned int i = 0; i < minterms.size(); i++) {
+        std::cout << std::setw(3) << minterms[i];
+    }
+    std::cout << std::endl;
+    for (unsigned int i = 0; i < prime_implicants.size(); i++) {
+        std::cout << "P" << i + 1 << ": ";
+        for (unsigned int j = 0; j < minterms.size(); j++) {
+            std::cout << std::setw(3) << prime_table[i][j];
+        }
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
 }
