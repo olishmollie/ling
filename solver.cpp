@@ -3,10 +3,6 @@
 #include <algorithm>
 #include <set>
 
-bool compare(Implicant &a, Implicant &b) {
-    return a.num_ones < b.num_ones;
-}
-
 Solver::Solver(Table *table) : table(table) {
     for (unsigned int i = 0; i < table->rows; i++) {
         if (table->truth_table[i][table->numvars] == '1') {
@@ -75,10 +71,14 @@ Implicant Solver::compare(const Implicant &a, const Implicant &b) const {
     return a;
 }
 
+bool cmp_num_ones(const Implicant &a, const Implicant &b) {
+    return a.num_ones < b.num_ones;
+}
+
 // A naive implementation of the Quine-McCluskey tabular method
 // for minimizing boolean expressions:
 // https://en.wikipedia.org/wiki/Quine-McCluskey_algorithm
-std::set<Implicant> Solver::solve() {
+std::vector<Implicant> Solver::solve() {
     std::set<Implicant> result, used;
 
     while (!done()) {
@@ -112,5 +112,12 @@ std::set<Implicant> Solver::solve() {
         result.clear();
     }
 
-    return impls;
+    // Use the set to create a vector and sort it by number of ones. I
+    // was trying to figure out to do this with a set alone, but
+    // this is a lot easier.
+    std::vector<Implicant> impl_vec =
+        std::vector<Implicant>(impls.begin(), impls.end());
+    std::sort(impl_vec.begin(), impl_vec.end(), cmp_num_ones);
+
+    return impl_vec;
 }

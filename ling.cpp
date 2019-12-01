@@ -9,6 +9,8 @@
 
 using namespace std;
 
+void print_vec(std::vector<Implicant> &impls);
+
 int main() {
     string input;
 
@@ -29,16 +31,16 @@ int main() {
             cout << table << endl << endl;
 
             Solver solver(&table);
-            std::set<Implicant> essential_primes = solver.solve();
+            std::vector<Implicant> essential_primes = solver.solve();
 
             if (essential_primes.empty()) {
                 std::cout << "F" << std::endl;
 
             } else if (essential_primes.size() == 1 &&
-                       essential_primes.begin()->is_true()) {
+                       essential_primes[0].is_true()) {
                 std::cout << "T" << std::endl;
             } else {
-                solver.print_impls();
+                print_vec(essential_primes);
             }
 
         } catch (const ScanError &e) {
@@ -47,6 +49,13 @@ int main() {
             cerr << "parse error: " << e.msg << endl;
         }
         cout << ">> ";
+    }
+    cout << endl;
+}
+
+void print_vec(std::vector<Implicant> &impls) {
+    for (auto impl : impls) {
+        cout << impl.to_string() << endl;
     }
     cout << endl;
 }
