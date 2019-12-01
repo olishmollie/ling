@@ -1,4 +1,4 @@
-# Ling - A (work-in-progress) boolean expression simplifier.
+# Ling
 
 ![Ling Demo](demo.gif)
 
