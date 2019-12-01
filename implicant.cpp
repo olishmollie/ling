@@ -6,12 +6,14 @@
 
 Implicant::Implicant() : num_ones(0), done(false) {}
 
-int count_ones(std::string str) {
-    return std::count(str.begin(), str.end(), '1');
+Implicant::Implicant(std::string bin_rep)
+    : bin_rep(bin_rep), done(false) {
+    num_ones = std::count(bin_rep.begin(), bin_rep.end(), '1');
 }
 
-Implicant::Implicant(std::string bin_rep)
-    : bin_rep(bin_rep), num_ones(count_ones(bin_rep)), done(false) {}
+bool Implicant::is_true() const {
+    return bin_rep == std::string(bin_rep.length(), '-');
+}
 
 std::string Implicant::to_string() const {
     return bin_rep + (done ? "*" : "");

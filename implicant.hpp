@@ -9,6 +9,7 @@ struct Implicant {
     bool done;
     Implicant();
     Implicant(std::string bin_rep);
+    bool is_true() const;
     std::string to_string() const;
 };
 

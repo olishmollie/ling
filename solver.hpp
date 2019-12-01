@@ -11,13 +11,13 @@ class Solver {
     Table *table;
     std::set<Implicant> impls;
 
-    Implicant compare(const Implicant &a, const Implicant &b);
-    void solve();
-    void print_set() const;
+    Implicant compare(const Implicant &a, const Implicant &b) const;
+    bool done() const;
 
   public:
     Solver(Table *table);
-    void run();
+    std::set<Implicant> solve();
+    void print_impls() const;
 };
 
 #endif
