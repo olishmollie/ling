@@ -4,11 +4,14 @@
 #include <iostream>
 #include <sstream>
 
-Implicant::Implicant() : num_ones(0), done(false) {}
+Implicant::Implicant() : done(false) {}
 
 Implicant::Implicant(std::string bin_rep)
     : done(false), bin_rep(bin_rep) {
-    num_ones = std::count(bin_rep.begin(), bin_rep.end(), '1');
+}
+
+unsigned int Implicant::num_ones() const {
+    return std::count(bin_rep.begin(), bin_rep.end(), '1');
 }
 
 void Implicant::add_minterm(unsigned int minterm) {

@@ -17,6 +17,8 @@ class Table {
     unsigned int numvars, rows, cols;
     std::string *truth_table;
 
+    std::string *get_vars() const;
+
     friend std::ostream &operator<<(std::ostream &os, const Table &table);
 };
 

@@ -5,7 +5,6 @@
 #include <set>
 
 struct Implicant {
-    int num_ones;
     bool done;
 
     std::set<unsigned int> minterms;
@@ -14,6 +13,7 @@ struct Implicant {
     Implicant();
     Implicant(std::string bin_rep);
 
+    unsigned int num_ones() const;
     void add_minterm(unsigned int minterm);
     void add_minterms(const std::set<unsigned int> &other_minterms);
     bool is_true() const;

@@ -37,7 +37,7 @@ void Table::solve(unsigned int numvars, unsigned int rows, unsigned int cols) {
     // The evaluator visits each node in the AST.
     Evaluator ev;
 
-    // We keep an array of the variables for printing them nicely later.
+    // We'll keep an array of the variables for solving things later.
     vars = new std::string[numvars];
 
     // The actual truth table is an array of strings, where each character is
@@ -82,6 +82,10 @@ void Table::solve(unsigned int numvars, unsigned int rows, unsigned int cols) {
         // it to the output column.
         truth_table[i][numvars] = ast->accept(ev, ctx) + '0';
     }
+}
+
+std::string *Table::get_vars() const {
+    return vars;
 }
 
 // Oof.

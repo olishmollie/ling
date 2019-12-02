@@ -15,7 +15,7 @@ void print_vec(std::vector<std::vector<bool>> &table);
 int main() {
     string input;
 
-    cout << ">> ";
+    cout << "Y = ";
     while (getline(cin, input)) {
         unsigned int start = 0;
 
@@ -25,32 +25,21 @@ int main() {
 
             // the empty string parses to nullptr
             if (!ast) {
-                cout << ">> ";
+                cout << "Y = ";
                 continue;
             }
 
             Table table(ast);
             Solver solver(&table);
-            solver.solve();
+            cout << solver.solve() << endl;
 
-            if (solver.prime_implicants.empty()) {
-                std::cout << "F" << std::endl;
-            } else if (solver.prime_implicants.size() == 1 &&
-                       solver.prime_implicants[0].is_true()) {
-                std::cout << "T" << std::endl;
-            } else {
-                cout << table << endl << endl;
-                print_vec(solver.prime_implicants);
-                solver.petricks_method();
-                solver.print_prime_table();
-            }
+            cout << "Y = ";
 
         } catch (const ScanError &e) {
             cerr << "scan error: " << e.msg << endl;
         } catch (const ParseError &e) {
             cerr << "parse error: " << e.msg << endl;
         }
-        cout << ">> ";
     }
     cout << endl;
 }
