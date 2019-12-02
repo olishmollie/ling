@@ -23,4 +23,4 @@
 ```
 
 ## How it works
-Ling parses an expression belonging to the above grammar using a recursive descent parser. Then it generates a truth table for the expression and uses the [https://en.wikipedia.org/wiki/Quine-McCluskey_algorithm](Quine-McCluskey Algorithm) to find its prime implicants. It uses these to generate a new, simplified, boolean expression.
+Ling parses an expression belonging to the above grammar using a recursive descent parser. Then it generates a truth table for the expression and uses the [Quine Mcluskey Algorithm](https://en.wikipedia.org/wiki/Quine-McCluskey_algorithm) to find its prime implicants. It uses these to generate a new, simplified, boolean expression.
