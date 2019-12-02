@@ -23,5 +23,4 @@
 ```
 
 ## How it works
-
-Ling parses an expression using the above grammar, generates a truth table, then uses the Quine-McCluskey method to find prime implicants. If the expression isn't a tautology or a contradiction, it prints out prime implicants and a prime implicant table. I'm stuck on Petrick's method right now, but eventually I'd like it to be able to generate a new, simplified expression.
+Ling parses an expression belonging to the above grammar using a recursive descent parser. Then it generates a truth table for the expression and uses the [https://en.wikipedia.org/wiki/Quine-McCluskey_algorithm](Quine-McCluskey Algorithm) to find its prime implicants. It uses these to generate a new, simplified, boolean expression.

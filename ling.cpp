@@ -15,7 +15,7 @@ void print_vec(std::vector<std::vector<bool>> &table);
 int main() {
     string input;
 
-    cout << "Y = ";
+    cout << "Y>> ";
     while (getline(cin, input)) {
         unsigned int start = 0;
 
@@ -25,7 +25,7 @@ int main() {
 
             // the empty string parses to nullptr
             if (!ast) {
-                cout << "Y = ";
+                cout << "Y>> ";
                 continue;
             }
 
@@ -33,13 +33,14 @@ int main() {
             Solver solver(&table);
             cout << solver.solve() << endl;
 
-            cout << "Y = ";
-
         } catch (const ScanError &e) {
             cerr << "scan error: " << e.msg << endl;
         } catch (const ParseError &e) {
             cerr << "parse error: " << e.msg << endl;
         }
+
+        cout << "Y>> ";
+
     }
     cout << endl;
 }

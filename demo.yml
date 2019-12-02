@@ -111,231 +111,243 @@ config:
   
 # Records, feel free to edit them
 records:
-  - delay: 255
-    content: "Restored session: Sun Dec  1 15:03:10 CST 2019\r\n"
-  - delay: 168
-    content: "\e]7;file://macbookpro.local/Users/ajbond/Dev/cpp/ling\a\e[0;31majbond\e[0m ling (\e[32mmaster\e[0m \e[31m*\e[0m=):> "
-  - delay: 453
-    content: "\e[H\e[2J\e[0;31majbond\e[0m ling (\e[32mmaster\e[0m \e[31m*\e[0m=):> "
-  - delay: 326
-    content: '!'
-  - delay: 350
-    content: .
-  - delay: 346
-    content: "\r\n./a.out \r\n>> "
-  - delay: 1360
-    content: a
-  - delay: 124
-    content: ' '
-  - delay: 168
-    content: '*'
-  - delay: 57
-    content: ' '
-  - delay: 157
-    content: a
-  - delay: 66
-    content: ''''
-  - delay: 191
-    content: "\r\nF\r\n>> "
-  - delay: 204
-    content: a
-  - delay: 135
-    content: ' '
-  - delay: 112
-    content: +
-  - delay: 58
-    content: ' '
-  - delay: 212
-    content: a
-  - delay: 91
-    content: ''''
-  - delay: 292
-    content: "\r\nT\r\n>> "
-  - delay: 957
-    content: (
-  - delay: 124
-    content: a
-  - delay: 100
-    content: '-'
-  - delay: 247
-    content: '>'
-  - delay: 282
-    content: b
-  - delay: 271
-    content: )
-  - delay: 100
-    content: ' '
-  - delay: 247
-    content: =
-  - delay: 125
-    content: ' '
-  - delay: 293
-    content: a
+  - delay: 262
+    content: "Restored session: Sun Dec  1 22:46:36 CST 2019\r\n"
   - delay: 167
-    content: ''''
-  - delay: 103
+    content: "\e]7;file://macbookpro.local/Users/ajbond/Dev/cpp/ling\a\e[0;31majbond\e[0m ling (\e[32mmaster\e[0m \e[31m*\e[0m>):> "
+  - delay: 573
+    content: "\e[H\e[2J\e[0;31majbond\e[0m ling (\e[32mmaster\e[0m \e[31m*\e[0m>):> "
+  - delay: 316
+    content: '!'
+  - delay: 292
+    content: .
+  - delay: 157
+    content: "\r\n./a.out \r\nY>> "
+  - delay: 289
+    content: a
+  - delay: 113
     content: ' '
-  - delay: 134
+  - delay: 236
     content: +
+  - delay: 68
+    content: ' '
+  - delay: 247
+    content: a
+  - delay: 180
+    content: ''''
+  - delay: 742
+    content: "\r\nT\r\nY>> "
+  - delay: 315
+    content: a
   - delay: 101
     content: ' '
-  - delay: 124
-    content: b
-  - delay: 201
-    content: "\r\nT\r\n>> "
-  - delay: 1711
-    content: (
-  - delay: 146
-    content: a
-  - delay: 147
-    content: ''''
-  - delay: 156
+  - delay: 270
+    content: '*'
+  - delay: 113
     content: ' '
-  - delay: 170
-    content: +
-  - delay: 55
-    content: ' '
-  - delay: 350
-    content: b
-  - delay: 157
-    content: ''''
-  - delay: 281
-    content: )
-  - delay: 100
-    content: ' '
-  - delay: 158
-    content: =
-  - delay: 91
-    content: ' '
-  - delay: 337
-    content: (
-  - delay: 147
+  - delay: 191
     content: a
   - delay: 135
+    content: ''''
+  - delay: 539
+    content: "\r\nF\r\nY>> "
+  - delay: 484
+    content: (
+  - delay: 338
+    content: a
+  - delay: 11
+    content: ''''
+  - delay: 124
+    content: ' '
+  - delay: 225
+    content: +
+  - delay: 67
+    content: ' '
+  - delay: 248
+    content: b
+  - delay: 112
+    content: ''''
+  - delay: 259
+    content: )
+  - delay: 124
+    content: ' '
+  - delay: 191
+    content: =
+  - delay: 101
+    content: ' '
+  - delay: 574
+    content: a
+  - delay: 124
+    content: ' '
+  - delay: 180
+    content: '*'
+  - delay: 67
     content: ' '
   - delay: 237
-    content: '*'
-  - delay: 100
-    content: ' '
-  - delay: 112
     content: b
-  - delay: 260
-    content: )
-  - delay: 293
-    content: ''''
-  - delay: 234
-    content: "\r\nT\r\n>> "
-  - delay: 586
+  - delay: 325
+    content: "\r\nF\r\nY>> "
+  - delay: 856
     content: (
-  - delay: 146
+  - delay: 157
     content: a
-  - delay: 113
-    content: '-'
-  - delay: 427
-    content: "\b \b"
-  - delay: 78
-    content: ' '
-  - delay: 80
-    content: =
-  - delay: 90
-    content: ' '
-  - delay: 113
-    content: b
-  - delay: 213
-    content: )
   - delay: 102
-    content: ' '
-  - delay: 156
-    content: =
-  - delay: 103
-    content: ' '
-  - delay: 516
-    content: (
-  - delay: 158
-    content: a
+    content: ''''
   - delay: 101
-    content: '-'
-  - delay: 248
-    content: '>'
-  - delay: 326
-    content: b
-  - delay: 247
-    content: )
-  - delay: 113
+    content: ' '
+  - delay: 168
+    content: +
+  - delay: 68
     content: ' '
   - delay: 203
+    content: b
+  - delay: 101
+    content: ''''
+  - delay: 304
+    content: )
+  - delay: 607
+    content: ''''
+  - delay: 180
+    content: ' '
+  - delay: 124
     content: =
   - delay: 79
     content: ' '
-  - delay: 1540
-    content: "\b \b"
-  - delay: 90
-    content: "\b \b"
-  - delay: 506
-    content: '*'
-  - delay: 69
-    content: ' '
-  - delay: 439
-    content: (
-  - delay: 360
-    content: b
-  - delay: 180
-    content: '-'
-  - delay: 225
-    content: '>'
-  - delay: 168
+  - delay: 258
     content: a
-  - delay: 236
-    content: )
-  - delay: 270
-    content: "\r\nT\r\n>> "
-  - delay: 1283
-    content: b
-  - delay: 191
-    content: '*'
-  - delay: 168
-    content: c
-  - delay: 102
-    content: ''''
-  - delay: 753
-    content: '*'
-  - delay: 201
-    content: d
-  - delay: 261
-    content: ''''
-  - delay: 123
-    content: ' '
-  - delay: 146
-    content: +
-  - delay: 56
-    content: ' '
-  - delay: 798
-    content: a
-  - delay: 260
-    content: '*'
-  - delay: 235
-    content: b
-  - delay: 102
-    content: ''''
-  - delay: 112
+  - delay: 135
     content: ' '
   - delay: 169
-    content: +
-  - delay: 45
-    content: ' '
-  - delay: 135
-    content: a
-  - delay: 473
     content: '*'
-  - delay: 247
+  - delay: 56
+    content: ' '
+  - delay: 248
+    content: b
+  - delay: 404
+    content: "\r\nT\r\nY>> "
+  - delay: 2116
+    content: (
+  - delay: 146
+    content: a
+  - delay: 101
+    content: ' '
+  - delay: 574
+    content: '-'
+  - delay: 304
+    content: '>'
+  - delay: 135
+    content: ' '
+  - delay: 169
+    content: b
+  - delay: 258
+    content: )
+  - delay: 529
+    content: ' '
+  - delay: 191
+    content: =
+  - delay: 89
+    content: ' '
+  - delay: 193
+    content: a
+  - delay: 90
+    content: ''''
+  - delay: 101
+    content: ' '
+  - delay: 213
+    content: +
+  - delay: 21
+    content: ' '
+  - delay: 361
+    content: b
+  - delay: 528
+    content: "\r\nT\r\nY>> "
+  - delay: 1823
+    content: a
+  - delay: 90
+    content: ''''
+  - delay: 271
+    content: '*'
+  - delay: 303
+    content: b
+  - delay: 709
+    content: '*'
+  - delay: 326
     content: c
-  - delay: 202
-    content: "\r\n a b c d | b * c' * d' + a * b' + a * c\r\n---------|-----------------------------\r\n 0 0 0 0 |                            0\r\n 0 0 0 1 |                            0\r\n 0 0 1 0 |                            0\r\n 0 0 1 1 |                            0\r\n 0 1 0 0 |                            1\r\n 0 1 0 1 |                            0\r\n 0 1 1 0 |                            0\r\n 0 1 1 1 |                            0\r\n 1 0 0 0 |                            1\r\n 1 0 0 1 |                            1\r\n 1 0 1 0 |                            1\r\n 1 0 1 1 |                            1\r\n 1 1 0 0 |                            1\r\n 1 1 0 1 |                            0\r\n 1 1 1 0 |                            1\r\n 1 1 1 1 |                            1\r\n\r\n[4, 12] -100*\r\n[8, 10, 12, 14] 1--0*\r\n[8, 9, 10, 11] 10--*\r\n[10, 11, 14, 15] 1-1-*\r\n\r\n      4  8  9 10 11 12 14 15\r\nP1:   1  0  0  0  0  1  0  0\r\nP2:   0  1  0  1  0  1  1  0\r\nP3:   0  1  1  1  1  0  0  0\r\nP4:   0  0  0  1  1  0  1  1\r\n\r\n>> "
-  - delay: 3070
-    content: "^D\b\b\r\n"
-  - delay: 52
-    content: "\e]7;file://macbookpro.local/Users/ajbond/Dev/cpp/ling\a\e[0;31majbond\e[0m ling (\e[32mmaster\e[0m \e[31m*\e[0m=):> "
-  - delay: 421
+  - delay: 79
+    content: ' '
+  - delay: 180
+    content: +
+  - delay: 67
+    content: ' '
+  - delay: 192
+    content: a
+  - delay: 146
+    content: ''''
+  - delay: 1069
+    content: '*'
+  - delay: 1237
+    content: b
+  - delay: 484
+    content: '*'
+  - delay: 326
+    content: c
+  - delay: 79
+    content: ''''
+  - delay: 291
+    content: "\r\na' * b\r\nY>> "
+  - delay: 1396
+    content: a
+  - delay: 258
+    content: '*'
+  - delay: 248
+    content: b
+  - delay: 247
+    content: '*'
+  - delay: 743
+    content: c
+  - delay: 123
+    content: ' '
+  - delay: 394
+    content: +
+  - delay: 135
+    content: ' '
+  - delay: 450
+    content: a
+  - delay: 270
+    content: '*'
+  - delay: 270
+    content: b
+  - delay: 169
+    content: ''''
+  - delay: 326
+    content: '*'
+  - delay: 327
+    content: c
+  - delay: 101
+    content: ' '
+  - delay: 191
+    content: +
+  - delay: 123
+    content: ' '
+  - delay: 248
+    content: a
+  - delay: 270
+    content: '*'
+  - delay: 428
+    content: b
+  - delay: 393
+    content: '*'
+  - delay: 371
+    content: c
+  - delay: 102
+    content: ''''
+  - delay: 449
+    content: "\r\na * c + a * b\r\nY>> "
+  - delay: 1688
+    content: "^C\r\n"
+  - delay: 53
+    content: "\e]7;file://macbookpro.local/Users/ajbond/Dev/cpp/ling\a\e[0;31majbond\e[0m ling (\e[32mmaster\e[0m \e[31m*\e[0m>):> "
+  - delay: 1296
     content: "logout\r\nSaving session..."
   - delay: 10
     content: "\r\n...saving history..."
