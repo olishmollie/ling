@@ -23,7 +23,7 @@ Table new_table(Ast *ast) {
 
     table.rows = 2 << (table.vars.size() - 1);
     table.cols = table.vars.size() + 1;
-    table.data = std::vector<string>(table.rows, string(table.cols, '-'));
+    table.data.resize(table.rows, string(table.cols, '-'));
 
     return table;
 }
