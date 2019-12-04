@@ -1,24 +1,20 @@
 #ifndef _SOLVER_H
 #define _SOLVER_H
 
+#include "ast.hpp"
 #include "implicant.hpp"
 #include "table.hpp"
 
-#include <set>
-#include <vector>
-
-class Solver {
+struct Solver {
     Table *table;
 
-    std::set<Implicant> impls;
+    std::set<Implicant> implicants;
     std::vector<unsigned int> minterms;
-
-    void print_impls() const;
-
-  public:
-    Solver(Table *table);
-
-    Ast *solve();
 };
+
+Solver new_solver(Table *table);
+Ast *solve(Solver &self);
+
+void print_implicants(const Solver &self);
 
 #endif

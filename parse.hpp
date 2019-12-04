@@ -2,10 +2,9 @@
 #define _PARSE_H
 
 #include "ast.hpp"
+#include "typedef.hpp"
 
 #include <vector>
-
-typedef std::vector<Token> TokenVec;
 
 struct ScanError : std::exception {
     std::string msg;

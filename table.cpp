@@ -3,67 +3,56 @@
 #include <iomanip>
 #include <iostream>
 #include <map>
+#include <string>
 
-Table::Table(Ast *ast) : ast(ast) {
-    unsigned int numvars, rows, cols;
+using std::cout;
+using std::endl;
+using std::ostream;
+using std::right;
+using std::setw;
+using std::string;
 
-    // A context is just a hash table that maps variables to their
-    // boolean values at any given time.
-    ast->add_to_context(ctx);
+Table new_table(Ast *ast) {
+    Table table;
+    table.ast = ast;
 
-    // The number of boolean variables present in the expression.
-    numvars = ctx.size();
+    ast->add_to_context(table.ctx);
+    for (auto &pair : table.ctx) {
+        table.vars.push_back(pair.first);
+    }
 
-    // The number of rows in the truth table equals 2^(n-1)
-    rows = 2 << (numvars - 1);
+    table.rows = 2 << (table.vars.size() - 1);
+    table.cols = table.vars.size() + 1;
+    table.data = std::vector<string>(table.rows, string(table.cols, '-'));
 
-    // The extra column is for the output
-    cols = numvars + 1;
-
-    solve(numvars, rows, cols);
-
-    // We do this afterward to make sure its exception safe.
-    this->numvars = numvars;
-    this->rows = rows;
-    this->cols = cols;
+    return table;
 }
 
-Table::~Table() {
-    delete[] truth_table;
-    delete ast;
+char get_output(const Table &self, const unsigned int row) {
+    return self.data[row][self.vars.size()];
 }
 
-void Table::solve(unsigned int numvars, unsigned int rows, unsigned int cols) {
+void set_output(Table &self, unsigned int row, char val) {
+    self.data[row][self.vars.size()] = val;
+}
+
+void solve(Table &self) {
     // The evaluator visits each node in the AST.
     Evaluator ev;
 
-    // We'll keep an array of the variables for solving things later.
-    vars = new std::string[numvars];
-
-    // The actual truth table is an array of strings, where each character is
-    // a column in the table.
-    truth_table = new std::string[rows];
-
-    for (unsigned int i = 0; i < rows; i++) {
-        // Create a new row.
-        truth_table[i] = std::string(cols, ' ');
-
+    for (unsigned int i = 0; i < self.rows; i++) {
         // This loop updates the context. The map is ordered, so this is the way
         // I came up with to increment the bools in the map as if they were
         // binary strings. Could probably do with a refactor.
-        unsigned j = 0;
-        for (auto &pair : ctx) {
-
-            // Populate the vars array. Only necessary the first go around.
-            if (i == 0) {
-                vars[j] = pair.first;
-            }
+        for (unsigned int j = 0; j < self.vars.size(); j++) {
+            string var = self.vars[j];
+            bool &val = self.ctx[var];
 
             // If there's a T or F, they map to their boolean values
-            if (pair.first == "T") {
-                pair.second = true;
-            } else if (pair.first == "T") {
-                pair.second = false;
+            if (var == "T") {
+                val = true;
+            } else if (var == "T") {
+                val = false;
             }
 
             // This one is interesting. The most significant 'bit' (really a
@@ -71,66 +60,61 @@ void Table::solve(unsigned int numvars, unsigned int rows, unsigned int cols) {
             // shifted by a certain number of bits. Then we and by one to
             // get the boolean.
             else {
-                pair.second = i >> ((numvars - 1 - j)) & 1;
+                val = i >> ((self.vars.size() - 1 - j)) & 1;
             }
 
             // Assign the boolean to this variable in the context.
-            truth_table[i][j++] = pair.second + '0';
+            self.data[i][j] = val + '0';
         }
 
         // Evaluate the expression for the given context, and assign
         // it to the output column.
-        truth_table[i][numvars] = ast->accept(ev, ctx) + '0';
+        char output = self.ast->accept(ev, self.ctx) + '0';
+        set_output(self, i, output);
     }
-}
-
-std::string *Table::get_vars() const {
-    return vars;
 }
 
 // Oof.
-std::ostream &operator<<(std::ostream &os, const Table &table) {
-    std::string ast_str;
+void print_table(Table &table) {
+    string ast_str;
     unsigned int len_inputs, row_len;
 
     // print heading
-    os << " ";
+    cout << " ";
     len_inputs = 0;
-    for (unsigned int i = 0; i < table.numvars; i++) {
+    for (unsigned int i = 0; i < table.vars.size(); i++) {
         len_inputs += table.vars[i].length() + 1;
-        os << table.vars[i] << " ";
+        cout << table.vars[i] << " ";
     }
     ast_str = table.ast->to_string();
-    os << "| " << ast_str << std::endl;
+    cout << "| " << ast_str << endl;
 
     // print "----" below heading
     row_len = ast_str.length() + len_inputs + 2;
     for (unsigned int i = 0; i < row_len + 1; i++) {
-        os << (i == len_inputs + 1 ? '|' : '-');
+        cout << (i == len_inputs + 1 ? '|' : '-');
     }
-    os << std::endl;
+    cout << endl;
 
     // print table
     for (unsigned int i = 0; i < table.rows; i++) {
-        os << " ";
+        cout << " ";
         for (unsigned int j = 0; j < table.cols; j++) {
             if (j == table.cols - 1) {
-                os << std::setw(row_len - len_inputs - 2);
+                cout << setw(row_len - len_inputs - 2);
             } else {
-                os << std::setw(table.vars[j].length());
+                cout << setw(table.vars[j].length());
             }
-            os << std::right << table.truth_table[i][j];
+            cout << right << table.data[i][j];
             if (j != table.cols - 1) {
-                os << " ";
+                cout << " ";
             }
             if (j == table.cols - 2) {
-                os << "| ";
+                cout << "| ";
             }
         }
         if (i != table.rows - 1) {
-            os << std::endl;
+            cout << endl;
         }
     }
-
-    return os;
 }

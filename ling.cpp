@@ -9,9 +9,6 @@
 
 using namespace std;
 
-void print_vec(std::vector<Implicant> &impls);
-void print_vec(std::vector<std::vector<bool>> &table);
-
 int main() {
     string input;
 
@@ -29,9 +26,12 @@ int main() {
                 continue;
             }
 
-            Table table(ast);
-            Solver solver(&table);
-            cout << solver.solve() << endl;
+            Table table = new_table(ast);
+            solve(table);
+
+            Solver solver = new_solver(&table);
+            Ast *output = solve(solver);
+            cout << output << endl;
 
         } catch (const ScanError &e) {
             cerr << "scan error: " << e.msg << endl;
@@ -40,25 +40,6 @@ int main() {
         }
 
         cout << "Y>> ";
-
-    }
-    cout << endl;
-}
-
-void print_vec(std::vector<Implicant> &impls) {
-    for (auto impl : impls) {
-        cout << impl.to_string() << endl;
-    }
-    cout << endl;
-}
-
-void print_vec(std::vector<std::vector<bool>> &table) {
-    for (unsigned int i = 0; i < table.size(); i++) {
-        cout << i << ":";
-        for (unsigned int j = 0; j < table[i].size(); j++) {
-            cout << (table[i][j] ? "X" : " ");
-        }
-        cout << endl;
     }
     cout << endl;
 }

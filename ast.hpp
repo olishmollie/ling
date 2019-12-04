@@ -1,12 +1,11 @@
 #ifndef _AST_H
 #define _AST_H
 
-#include <iostream>
-#include <string>
-#include <map>
+#include "typedef.hpp"
 
-typedef std::string Token;
-typedef std::map<Token, bool> Context;
+#include <iostream>
+#include <map>
+#include <string>
 
 struct Ast;
 struct Evaluator;

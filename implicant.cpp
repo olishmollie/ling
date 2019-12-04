@@ -4,47 +4,59 @@
 #include <iostream>
 #include <sstream>
 
-Implicant::Implicant() : done(false) {}
+using std::count;
+using std::set;
+using std::string;
+using std::stringstream;
 
-Implicant::Implicant(std::string bin_rep)
-    : done(false), bin_rep(bin_rep) {
+Implicant new_implicant() {
+    Implicant impl;
+    impl.done = false;
+    return impl;
 }
 
-unsigned int Implicant::num_ones() const {
-    return std::count(bin_rep.begin(), bin_rep.end(), '1');
+Implicant new_implicant(const string bit_str) {
+    Implicant impl = new_implicant();
+    impl.bit_str = bit_str;
+    return impl;
 }
 
-void Implicant::add_minterm(unsigned int minterm) {
-    minterms.insert(minterm);
+unsigned int num_ones(const Implicant &self) {
+    return count(self.bit_str.begin(), self.bit_str.end(), '1');
 }
 
-void Implicant::add_minterms(const std::set<unsigned int> &other_minterms) {
+void add_minterm(Implicant &self, const unsigned int minterm) {
+    self.minterms.insert(minterm);
+}
+
+void add_minterms(Implicant &self, const set<unsigned int> &other_minterms) {
     for (auto minterm : other_minterms) {
-        minterms.insert(minterm);
+        self.minterms.insert(minterm);
     }
 }
 
-bool Implicant::is_true() const {
-    return bin_rep == std::string(bin_rep.length(), '-');
+bool is_true(const Implicant &self) {
+    return self.bit_str == string(self.bit_str.length(), '-');
 }
 
-std::string Implicant::to_string() const {
-    std::stringstream ss;
+string to_string(const Implicant &self) {
+    stringstream ss;
     ss << "[";
-    for (auto it = minterms.begin(); it != --minterms.end(); ++it) {
+    for (auto it = self.minterms.begin(); it != --self.minterms.end(); ++it) {
         ss << *it;
         ss << ", ";
     }
-    ss << *--minterms.end() << "] " << bin_rep << (done ? "*" : "");
+    ss << *--self.minterms.end() << "] " << self.bit_str
+       << (self.done ? "*" : "");
     return ss.str();
 }
 
 bool operator<(const Implicant &a, const Implicant &b) {
-    return a.bin_rep < b.bin_rep;
+    return a.bit_str < b.bit_str;
 }
 
 bool operator==(const Implicant &a, const Implicant &b) {
-    return a.bin_rep == b.bin_rep;
+    return a.bit_str == b.bit_str;
 }
 
 bool operator!=(const Implicant &a, const Implicant &b) {

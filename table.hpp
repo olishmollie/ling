@@ -4,22 +4,24 @@
 #include "implicant.hpp"
 #include "parse.hpp"
 
-class Table {
+struct Table {
     Ast *ast;
     Context ctx;
-    std::string *vars;
 
-    void solve(unsigned int numvars, unsigned int rows, unsigned int cols);
+    unsigned int rows, cols;
 
-  public:
-    Table(Ast *ast);
-    ~Table();
-    unsigned int numvars, rows, cols;
-    std::string *truth_table;
+    std::vector<std::string> vars;
+    std::vector<std::string> data;
 
-    std::string *get_vars() const;
-
-    friend std::ostream &operator<<(std::ostream &os, const Table &table);
+    ~Table() { delete ast; }
 };
+
+Table new_table(Ast *ast);
+void delete_table(Table *self);
+
+char get_output(const Table &self, const unsigned int row);
+void solve(Table &self);
+
+void print_table(Table &table);
 
 #endif
