@@ -24,7 +24,7 @@ void init(Solver &self) {
 
     for (unsigned int i = 0; i < self.table->rows; i++) {
         if (get_output(*self.table, i) == '1') {
-            self.minterms.push_back(i);
+            self.minterms.insert(i);
             bit_str =
                 self.table->data[i].substr(0, self.table->data[i].length() - 1);
             implicant = new_implicant(bit_str);

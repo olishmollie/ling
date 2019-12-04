@@ -9,7 +9,7 @@ struct Solver {
     Table *table;
 
     std::set<Implicant> implicants;
-    std::vector<unsigned int> minterms;
+    std::set<unsigned int> minterms;
 };
 
 Solver new_solver(Table *table);
